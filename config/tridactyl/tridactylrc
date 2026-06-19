@@ -1,0 +1,39 @@
+" Tridactyl configuration
+" https://github.com/tridactyl/tridactyl
+
+" ── General ──────────────────────────────────────────────────────────────────
+set smoothscroll true
+set newtab about:blank
+
+" ── Hints ────────────────────────────────────────────────────────────────────
+" Use home-row keys for hints
+set hintchars asdfghjkl
+
+" Open hint in background tab
+bind F hint -b
+
+" ── Tab navigation ────────────────────────────────────────────────────────────
+bind J tabnext
+bind K tabprev
+bind d tabclose
+bind u undo
+
+" ── History navigation ────────────────────────────────────────────────────────
+bind H back
+bind L forward
+
+" ── Clipboard ────────────────────────────────────────────────────────────────
+bind yy clipboard yank
+
+" ── Search engines ───────────────────────────────────────────────────────────
+set searchengine google
+set searchurls.g   https://www.google.com/search?q=%s
+set searchurls.ddg https://duckduckgo.com/?q=%s
+set searchurls.gh  https://github.com/search?q=%s
+set searchurls.nix https://search.nixos.org/packages?query=%s
+
+" ── Editor ───────────────────────────────────────────────────────────────────
+set editorcmd vim
+
+" ── Appearance ───────────────────────────────────────────────────────────────
+colorscheme dark
