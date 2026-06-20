@@ -12,12 +12,12 @@
 #   2. Add a home.file entry below following the same pattern.
 #   3. Run `nixos-rebuild switch` once to create the new symlink.
 
-{ config, ... }:
+{ config,username, ... }:
 
 let
   # Assumes the repo is checked out at ~/hnc.
   # Adjust this path if the repo lives elsewhere on a specific machine.
-  repo = "${config.home.homeDirectory}/hnc";
+  repo = "${config.home.homeDirectory}/${username}";
 in
 {
   # ── Tridactyl ──────────────────────────────────────────────────────────────

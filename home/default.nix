@@ -6,7 +6,7 @@
     ./desktop.nix
     ./editors.nix
     ./dev.nix
-    ./config.nix
+    # ./config.nix
     # ./browsers.nix
   ];
 

@@ -87,9 +87,9 @@
 
     # Thin loader only — real config lives in config/emacs/init.el (live-editable).
     # Edit that file and restart Emacs; no rebuild required.
-    extraConfig = ''
-      (load (expand-file-name "~/hnc/config/emacs/init.el") nil :nomessage)
-    '';
+    # extraConfig = ''
+    #   (load (expand-file-name "~/${username}/config/emacs/init.el") nil :nomessage)
+    # '';
   };
 
   # ── LSP / formatter helpers used by editors ───────────────────────────────────
