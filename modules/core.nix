@@ -2,7 +2,7 @@
 
 {
   # Nix settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" "local-overlay-store" ];
   nix.settings.auto-optimise-store = true;
 
   # Locale & timezone (override per-host with mkForce or in host module)
@@ -11,8 +11,10 @@
 
   # Common system packages
   environment.systemPackages = with pkgs; [
-    vim
+    helix
+    gh
     git
+    tree
     curl
     htop
   ];

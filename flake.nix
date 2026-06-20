@@ -80,10 +80,10 @@
             ./hardware/thinkpad-e16.nix
             ./modules/core.nix
             ./modules/keyd.nix
-            (import ./modules/users.nix "alice")
+            (import ./modules/users.nix "jundmz")
             ./modules/physical.nix
-            inputs.niri-flake.nixosModules.niri   # niri pkg + xdg-portal-gnome
-          ] ++ mkHome "alice" ./home;
+            # inputs.niri-flake.nixosModules.niri   # niri pkg + xdg-portal-gnome
+          ] ++ mkHome "jundmz" ./home;
         };
       };
 
