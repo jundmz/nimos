@@ -7,8 +7,6 @@
 
   # Firmware & microcode
   hardware.enableRedistributableFirmware = true;
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault false;
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault false;
 
   # Power management
   services.thermald.enable = lib.mkDefault true;

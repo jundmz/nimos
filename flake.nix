@@ -77,6 +77,7 @@
           system = "x86_64-linux";
           modules = [
             disko.nixosModules.disko
+            ./disko/ext4.nix
             ./hardware/thinkpad-e16.nix
             ./modules/core.nix
             ./modules/keyd.nix
