@@ -2,7 +2,7 @@
   description = "NixOS configuration with home-manager and disko";
 
   nixConfig = {
-    extra-substituters      = [ "https://niri.cachix.org" ];
+    extra-substituters = [ "https://niri.cachix.org" ];
     extra-trusted-public-keys = [
       "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
     ];
@@ -37,15 +37,24 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nixos-hardware, disko, ... }:
+  outputs =
+    inputs@{
+      nixpkgs,
+      home-manager,
+      nixos-hardware,
+      disko,
+      ...
+    }:
     let
       lib = nixpkgs.lib;
 
-      mkHost = { system, modules }: lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs nixos-hardware disko; };
-        modules = modules;
-      };
+      mkHost =
+        { system, modules }:
+        lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs nixos-hardware disko; };
+          modules = modules;
+        };
 
       mkHome = username: hmConfigPath: [
         home-manager.nixosModules.home-manager
@@ -82,19 +91,20 @@
             ./modules/core.nix
             ./modules/keyd.nix
             ./modules/physical.nix
-            ./modules/virtualization.nix
+            # ./modules/virtualization.nix
 
             (import ./modules/users.nix "jundmz")
             # inputs.niri-flake.nixosModules.niri   # niri pkg + xdg-portal-gnome
-          ] ++ mkHome "jundmz" ./home;
+          ]
+          ++ mkHome "jundmz" ./home;
         };
       };
 
       # Reusable NixOS modules
       nixosModules = {
         physical = import ./modules/physical.nix;
-        core     = import ./modules/core.nix;
-        keyd     = import ./modules/keyd.nix;
+        core = import ./modules/core.nix;
+        keyd = import ./modules/keyd.nix;
       };
     };
 }

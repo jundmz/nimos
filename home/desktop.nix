@@ -10,29 +10,47 @@
 #   inputs.noctalia.homeModules.default  – exposes programs.noctalia
 
 {
-   # ── Alacritty terminal ────────────────────────────────────────────────────────
+  # ── Alacritty terminal ────────────────────────────────────────────────────────
   programs.alacritty = {
     enable = true;
     settings = {
       window = {
-        opacity         = 0.95;
-        padding         = { x = 8; y = 8; };
+        opacity = 0.95;
+        padding = {
+          x = 8;
+          y = 8;
+        };
         dynamic_padding = true;
-        decorations     = "none";
+        decorations = "none";
       };
       font = {
-        normal   = { family = "monospace"; style = "Regular"; };
-        bold     = { family = "monospace"; style = "Bold"; };
-        italic   = { family = "monospace"; style = "Italic"; };
-        size     = 12.0;
-        offset   = { x = 0; y = 1; };
+        normal = {
+          family = "monospace";
+          style = "Regular";
+        };
+        bold = {
+          family = "monospace";
+          style = "Bold";
+        };
+        italic = {
+          family = "monospace";
+          style = "Italic";
+        };
+        size = 12.0;
+        offset = {
+          x = 0;
+          y = 1;
+        };
       };
       cursor = {
-        style     = { shape = "Beam"; blinking = "On"; };
+        style = {
+          shape = "Beam";
+          blinking = "On";
+        };
         blink_interval = 600;
         unfocused_hollow = true;
       };
-      shell.program = "zsh";
+      # shell.program = "zsh";
       scrolling.history = 10000;
     };
   };
