@@ -6,22 +6,7 @@
 
     nrp = writeShellScriptBin "nrp" ''
 
-          set -e
-
-          REPO_NAME="$(basename "$PWD")"
-
-          gh repo create "$REPO_NAME" --public
-
-          git init
-          git add .
-          git commit -m "playing with this project"
-          git branch -M main
-
-          USER=$(gh api user -q .login)
-
-          git remote add origin "https://github.com/$USER/$REPO_NAME.git"
-
-          git push -u origin main
+          git init && git add * && git commit -m "playing with this project" && gh repo create "$(basename "$PWD")" --public --source=. --remote=origin --push
 
       '';
 
