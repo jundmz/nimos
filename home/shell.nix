@@ -1,6 +1,46 @@
 { config, lib, pkgs, ... }:
 
 {
+
+  let
+
+    nrp = writeShellScriptBin "nrp" ''
+
+          set -e
+
+          REPO_NAME="$(basename "$PWD")"
+
+          gh repo create "$REPO_NAME" --public
+
+          git init
+          git add .
+          git commit -m "playing with this project"
+          git branch -M main
+
+          USER=$(gh api user -q .login)
+
+          git remote add origin "https://github.com/$USER/$REPO_NAME.git"
+
+          git push -u origin main
+
+      '';
+
+    in
+    {
+    home.packages = [
+      nrp
+    ];
+
+      home.sessionVariables = {
+      EDITOR = "hx";
+      VISUAL = "hx";
+      PAGER = "bat";
+      MANPAGER = "bat --language=man --style=plain";
+      LESS = "-FR";
+      FZF_DEFAULT_COMMAND = "fd --type f";
+  };
+    
+  };
   # ── ZSH ─────────────────────────────────────────────────────────────────────
   programs.zsh = {
     enable = true;
@@ -24,6 +64,7 @@
     initExtra = ''
       # zoxide replaces cd (use plain `cd` to jump; `cdi` for interactive)
       eval "$(zoxide init zsh --cmd cd)"
+      eval "$(fzf --zsh)"
     '';
   };
 
