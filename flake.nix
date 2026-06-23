@@ -91,6 +91,7 @@
             ./modules/core.nix
             ./modules/keyd.nix
             ./modules/physical.nix
+            ./modules/vmteaks.nix
             # ./modules/virtualization.nix
 
             (import ./modules/users.nix "jundmz")

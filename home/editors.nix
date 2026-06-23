@@ -71,7 +71,7 @@
           formatter = {
             command = "nixfmt";
           };
-          auto-format = true;
+          auto-format = false;
         }
       ];
     };

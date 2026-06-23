@@ -13,6 +13,9 @@
   time.timeZone = lib.mkDefault "UTC";
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
   programs.niri = {
     enable = true;
 
@@ -30,5 +33,5 @@
   # Networking
   networking.networkmanager.enable = lib.mkDefault true;
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "26.11";
 }

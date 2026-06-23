@@ -142,6 +142,17 @@
       gs = "git status";
       gd = "git diff";
     };
+    initContent = ''
+            nix() {
+        if [[ "$1" == develop ]]; then
+          shift
+          command nix develop "$@" --command zsh
+        else
+          command nix "$@"
+        fi
+      }
+      alias nix-shell='nix-shell --command zsh'
+    '';
     initExtra = ''
       # zoxide replaces cd (use plain `cd` to jump; `cdi` for interactive)
       eval "$(zoxide init zsh --cmd cd)"
