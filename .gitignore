@@ -1,0 +1,26 @@
+# Nix build outputs
+result
+result-*
+*.drv
+
+# VM disk images (from build-vm / vmVariant)
+*.qcow2
+*.img
+*.raw
+*.vdi
+*.vmdk
+
+# Generated images (nixos-generators, dockerTools, etc.)
+*.iso
+*.tar
+*.tar.gz
+*.tar.xz
+
+# direnv / dev shell
+.direnv/
+.envrc.local
+
+# Editor / OS cruft
+*.swp
+*~
+.DS_Store
