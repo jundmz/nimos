@@ -91,7 +91,7 @@
             ./modules/core.nix
             ./modules/keyd.nix
             ./modules/physical.nix
-            ./modules/vmteaks.nix
+            ./modules/vmtweaks.nix
             # ./modules/virtualization.nix
 
             (import ./modules/users.nix "jundmz")
@@ -99,7 +99,23 @@
           ]
           ++ mkHome "jundmz" ./home;
         };
-      };
+
+        dvm = mkHost {
+          system = "x86_64-linux";
+          modules = [
+            ./modules/core.nix
+            ./modules/keyd.nix
+            ./modules/physical.nix
+            ./modules/vmtweaks.nix
+            # ./modules/virtualization.nix
+
+            (import ./modules/users.nix "jundmz")
+            # inputs.niri-flake.nixosModules.niri   # niri pkg + xdg-portal-gnome
+          ]
+          ++ mkHome "jundmz" ./home;
+        };
+
+              };
 
       # Reusable NixOS modules
       nixosModules = {
