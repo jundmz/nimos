@@ -124,10 +124,11 @@
         dvm = mkHost {
           system = "x86_64-linux";
           modules = [
+            # "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
             ./modules/core.nix
             ./modules/keyd.nix
-            ./modules/physical.nix
-            ./modules/vmtweaks.nix
+            # ./modules/physical.nix
+            # ./modules/vmtweaks.nix
             # ./modules/virtualization.nix
 
             # Shared baseline hardening (guest VM -- no hypervisor/cockpit/usbguard)

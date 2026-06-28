@@ -8,7 +8,7 @@
     { config, pkgs, lib, ... }:
     {
 
-
+    swapDevices = lib.mkVMOverride [ ];
     users.users.dev = {
       isNormalUser = true;
       extraGroups = [ "wheel" ]; # rootless docker needs no "docker" group
