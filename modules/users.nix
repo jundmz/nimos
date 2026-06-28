@@ -12,7 +12,7 @@ username:
   # Declarative-only accounts. NOTE: with this on, the user has NO password
   # until the sops secret exists. Create secrets/secrets.yaml BEFORE the first
   # `nixos-rebuild switch` (see SECURITY.md), or temporarily set this to true.
-  users.mutableUsers = false;
+  users.mutableUsers = true;
 
   users.users.${username} = {
     isNormalUser = true;
@@ -22,7 +22,7 @@ username:
       "input"
       "video"
     ]; # "libvirtd"/"kvm" are added by modules/hypervisor.nix
-    hashedPasswordFile = config.sops.secrets."${username}-password".path;
+    # hashedPasswordFile = config.sops.secrets."${username}-password".path;
     # Add your SSH key for key-only login over the VPN:
     # openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAA... you@host" ];
   };

@@ -35,11 +35,11 @@ in
       package = pkgs.qemu_kvm;
       runAsRoot = false; # run QEMU as unprivileged qemu-libvirtd, not root
       swtpm.enable = true; # software TPM 2.0 for guests (Windows 11, etc.)
-      ovmf = {
-        enable = true;
-        # OVMFFull = UEFI firmware with Secure Boot + TPM support for guests.
-        packages = [ pkgs.OVMFFull.fd ];
-      };
+      # ovmf = {
+      #   enable = true;
+      #   # OVMFFull = UEFI firmware with Secure Boot + TPM support for guests.
+      #   packages = [ pkgs.OVMFFull.fd ];
+      # };
       vhostUserPackages = [ pkgs.virtiofsd ]; # virtiofs shared folders
 
       # Appended to /etc/libvirt/qemu.conf. Kept conservative so that VM startup
