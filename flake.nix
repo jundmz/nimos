@@ -19,6 +19,14 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     niri-flake = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -87,12 +95,25 @@
           modules = [
             disko.nixosModules.disko
             ./disko/ext4.nix
+            # ./disko/luks-ext4.nix   # swap in for ext4.nix at reinstall for LUKS FDE
             ./hardware/thinkpad-e16.nix
             ./modules/core.nix
             ./modules/keyd.nix
             ./modules/physical.nix
-            ./modules/vmtweaks.nix
+            # ./modules/vmtweaks.nix
             # ./modules/virtualization.nix
+
+            # Security hardening (host = trust anchor, guests = hostile)
+            # ./modules/security/secrets.nix
+            ./modules/security/hardening.nix
+            ./modules/security/audit.nix
+            ./modules/security/usbguard.nix
+            # ./modules/security/secure-boot.nix   # enable AFTER sbctl key enrollment
+
+            # Hypervisor stack + management surfaces
+            (import ./modules/hypervisor.nix "jundmz")
+            # ./modules/cockpit.nix
+            # ./modules/vpn.nix
 
             (import ./modules/users.nix "jundmz")
             # inputs.niri-flake.nixosModules.niri   # niri pkg + xdg-portal-gnome
@@ -108,6 +129,11 @@
             ./modules/physical.nix
             ./modules/vmtweaks.nix
             # ./modules/virtualization.nix
+
+            # Shared baseline hardening (guest VM -- no hypervisor/cockpit/usbguard)
+            ./modules/security/secrets.nix
+            ./modules/security/hardening.nix
+            ./modules/security/audit.nix
 
             (import ./modules/users.nix "jundmz")
             # inputs.niri-flake.nixosModules.niri   # niri pkg + xdg-portal-gnome

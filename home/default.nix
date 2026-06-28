@@ -12,7 +12,7 @@
 
   # username and homeDirectory are set per-user via mkHome in flake.nix
   # Override these in a host-specific home module if needed.
-  home.stateVersion = "24.11";
+  home.stateVersion = "26.11";
 
   programs.home-manager.enable = true;
 }

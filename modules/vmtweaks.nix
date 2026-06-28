@@ -1,16 +1,36 @@
 # ./modules/vm-tweaks.nix
-{ pkgs, lib, ... }:
+{ ... }:
 {
-  virtualisation.vmVariant = {
+  # vmVariant is a function module so that `config`/`pkgs`/`lib` below resolve to
+  # the VM's OWN config (where the dev-password sops secret is declared), not the
+  # enclosing host config.
+  virtualisation.vmVariant =
+    { config, pkgs, lib, ... }:
+    {
 
-    
+
     users.users.dev = {
       isNormalUser = true;
       extraGroups = [ "wheel" ]; # rootless docker needs no "docker" group
-      initialPassword = "dev"; # throwaway creds; change for real use
+      # No plaintext creds in git: hash comes from sops (dev-password secret).
+      hashedPasswordFile = config.sops.secrets."dev-password".path;
       linger = true; # keep rootless docker alive without an active login
     };
-    users.users.root.initialPassword = "root";
+    users.users.root.hashedPassword = lib.mkForce "!"; # lock root in the dev VM
+    sops.secrets."dev-password".neededForUsers = true;
+
+    # This is a LOCAL, NAT'd dev VM reached via `ssh dev@localhost -p 2222`, so
+    # re-allow password auth here (the host stays key-only). The forwarded ports
+    # also need to be open on the guest firewall now that it's enabled.
+    services.openssh.settings.PasswordAuthentication = lib.mkForce true;
+    networking.firewall.allowedTCPPorts = [
+      22
+      8000
+      8080
+      9090
+      3000
+      9093
+    ];
 
     
     virtualisation = {
