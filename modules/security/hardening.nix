@@ -140,7 +140,7 @@
   # open 22 on the interface they want (heavy6: wg0 only; dvm: see vmtweaks).
   ##########################################################################
   services.openssh = {
-    enable = false;
+    # enable = false;
     settings = {
       PermitRootLogin = "no";
       PasswordAuthentication = false;
